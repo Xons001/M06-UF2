@@ -148,10 +148,10 @@ public class Principal {
 	public static void main(String[] args) {
 
 		conex.Conexion("for-honor.db");
-		//createNewTable();
-		//insertarDatos();
-		//consultaPersonaje();
-		//consultaCaballeros();
+		createNewTable();
+		insertarDatos();
+		consultaPersonaje();
+		consultaCaballeros();
 		consultaMasAtaqueSamurai();
 	}
 }
