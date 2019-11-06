@@ -40,21 +40,15 @@ public class ConexionMySQL {
 			System.out.println("Conexion creada correctamente");
 			System.out.println("--------------------------------------------------");
 			System.out.println("EJERCICIO 1");
-			//			MostrarArrayListaSocio(conn/*, listaSocios*/);
-			//			insertSocio(conn);
-			//			MostrarArrayListaSocio(conn/*, listaSocios*/);
-
+			MostrarArrayListaSocio(conn/*, listaSocios*/);
+			insertSocio(conn);
+			MostrarArrayListaSocio(conn/*, listaSocios*/);
 
 			System.out.println("--------------------------------------------------");
 			System.out.println("EJERCICIO 2");
 			cambiarDato(conn);
 
-			/*System.out.println("--------------------------------------------------");
-			System.out.println("EJERCICIO 7");
-			int numId;
-			System.out.println("Escribe el id que quieres eliminar de la base de datos");
-			numId = leerInteger();
-			eliminarPorID(conn, numId);*/
+		
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
