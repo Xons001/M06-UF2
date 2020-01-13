@@ -16,14 +16,14 @@ public class Principal {
 
 		// SQL statement for creating a new table
 		String sqlFaccion = "CREATE TABLE IF NOT EXISTS faccion (\n"
-				+ "    faccion_id integer PRIMARY KEY,\n"
+				+ "    faccion_id integer PRIMARY KEY AUTO_INCREMENT,\n"
 				+ "    nombre_faccion text NOT NULL,\n"
 				+ "    lore text NOT NULL\n"
 				+ ");";
 
 		// SQL statement for creating a new table
 		String sqlPersonaje = "CREATE TABLE IF NOT EXISTS personaje (\n"
-				+ "    	personaje_id integer PRIMARY KEY,\n"
+				+ "    	personaje_id integer PRIMARY KEY AUTO_INCREMENT,\n"
 				+ "    	nombre_personaje text NOT NULL,\n"
 				+ "    	ataque integer,\n"
 				+ "    	defensa integer,\n"
