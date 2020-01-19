@@ -32,7 +32,7 @@ public class ConexionMySQL {
 
 		String usuari = "root";
 		String contr = "";
-		String url = "jdbc:mysql://localhost:3306/bd_videoclub";
+		String url = "jdbc:mysql://localhost:3306/bd_videoclub?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("Driver cargado correctamente");
