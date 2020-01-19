@@ -166,7 +166,7 @@ public class ConexionMySQL {
 				if(respuesta.equalsIgnoreCase("Si")) {
 					//aqui empieza el update
 					preparedStatement = conn.prepareStatement("update socio set cuota = ? where nombre = ?");
-					preparedStatement.setInt(1, 2000);
+					preparedStatement.setInt(1, 8000);
 					preparedStatement.setString(2, "Sean");
 					preparedStatement.executeUpdate();
 					salir = true;
@@ -179,7 +179,18 @@ public class ConexionMySQL {
 			}
 
 			System.out.println("Resultado despues de hacer o no el update");
-			MostrarArrayListaSocio(conn);
+			statement2 = conn.createStatement();
+			consulta2 = "select NOMBRE, APELLIDOS, CUOTA from socio where nombre='Sean';";
+			rs2 = statement2.executeQuery(consulta2);
+
+			while (rs2.next()) {
+				String nombre = rs2.getString(1);
+				String apellidos = rs2.getString(2);
+				int cuota = rs2.getInt(3);
+
+				System.out.println("Nombre: " + nombre + ", Apellidos: " + apellidos + ", Cuota: " + cuota);
+			}
+			//MostrarArrayListaSocio(conn);
 			System.out.println("--------------------------------------------------");
 		} catch (SQLException e) {
 			System.out.println("No encuentra las bases de datos");
