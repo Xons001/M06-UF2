@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class ConexionDB {
 	
 	public void Conexion(String fileName) {
-		String url = "jdbc:sqlite:C:/sqlite/db/" + fileName;
+		String url = "jdbc:sqlite:../M06-UF2/" + fileName;
 		 
         try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {

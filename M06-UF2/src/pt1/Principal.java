@@ -1,5 +1,6 @@
 package pt1;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,21 +10,45 @@ import java.sql.Statement;
 public class Principal {
 
 	static ConexionDB conex = new ConexionDB();
+	// SQLite connection string
+	static String url = "jdbc:sqlite:../M06-UF2/for-honor.db";
+	
+	public static void main(String[] args) {
+		int a = 0;
+		File f = new File("../M06-UF2/for-honor.db");
 
+		if (f.exists()) {
+			a= 1;	
+		} 
+		
+		//Nos conectamos a la base de datos.
+		conex.Conexion("for-honor.db");
+		
+		//si el archivo no existe se crean las tablas y los inserts por defecto.
+		if (a==0){
+			createNewTable();
+			//inserta los datos por defecto
+			insertarDatos();
+		}
+		
+		consultaPersonaje();
+		consultaCaballeros();
+		consultaMasAtaqueSamurai();
+	}
+	
 	public static void createNewTable() {
-		// SQLite connection string
-		String url = "jdbc:sqlite:C:/sqlite/db/for-honor.db";
+		
 
 		// SQL statement for creating a new table
 		String sqlFaccion = "CREATE TABLE IF NOT EXISTS faccion (\n"
-				+ "    faccion_id integer PRIMARY KEY AUTO_INCREMENT,\n"
+				+ "    faccion_id integer PRIMARY KEY,\n"
 				+ "    nombre_faccion text NOT NULL,\n"
 				+ "    lore text NOT NULL\n"
 				+ ");";
 
 		// SQL statement for creating a new table
 		String sqlPersonaje = "CREATE TABLE IF NOT EXISTS personaje (\n"
-				+ "    	personaje_id integer PRIMARY KEY AUTO_INCREMENT,\n"
+				+ "    	personaje_id integer PRIMARY KEY,\n"
 				+ "    	nombre_personaje text NOT NULL,\n"
 				+ "    	ataque integer,\n"
 				+ "    	defensa integer,\n"
@@ -35,13 +60,13 @@ public class Principal {
 			// create a new table
 			stmt.execute(sqlFaccion);
 			stmt.execute(sqlPersonaje);
+			System.out.println("tablas creadas");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
 	public static void insertarDatos() {
-		String url = "jdbc:sqlite:C:/sqlite/db/for-honor.db";
 
 		/* Datos que vamos a insertar en Faccion*/
 		String nombreFaccion[]={"Caballeros","Vikingos","Samurais"};
@@ -62,7 +87,7 @@ public class Principal {
 			for (int j = 0; j < nombrePersonaje.length; j++) {
 				stmt.executeUpdate("INSERT INTO personaje (nombre_personaje, ataque, defensa, faccion_id) VALUES('"+nombrePersonaje[j]+"','"+ataque[j]+"','"+defensa[j]+"','"+faccion_id[j]+"')");
 			}
-
+			System.out.println("Datos Insertados");
 			//Consulta personaje
 			ResultSet rs = stmt.executeQuery("SELECT * FROM personaje");
 
@@ -75,7 +100,6 @@ public class Principal {
 	}
 
 	public static void consultaPersonaje() {
-		String url = "jdbc:sqlite:C:/sqlite/db/for-honor.db";
 
 		try (Connection conn = DriverManager.getConnection(url); 
 				Statement stmt = conn.createStatement()) {
@@ -99,7 +123,6 @@ public class Principal {
 	}
 
 	public static void consultaCaballeros() {
-		String url = "jdbc:sqlite:C:/sqlite/db/for-honor.db";
 
 		try (Connection conn = DriverManager.getConnection(url); 
 				Statement stmt = conn.createStatement()) {
@@ -123,7 +146,6 @@ public class Principal {
 	}
 	
 	public static void consultaMasAtaqueSamurai() {
-		String url = "jdbc:sqlite:C:/sqlite/db/for-honor.db";
 
 		try (Connection conn = DriverManager.getConnection(url); 
 				Statement stmt = conn.createStatement()) {
@@ -145,13 +167,5 @@ public class Principal {
 		}
 
 	}
-	public static void main(String[] args) {
-
-		conex.Conexion("for-honor.db");
-		createNewTable();
-		insertarDatos();
-		consultaPersonaje();
-		consultaCaballeros();
-		consultaMasAtaqueSamurai();
-	}
+	
 }
